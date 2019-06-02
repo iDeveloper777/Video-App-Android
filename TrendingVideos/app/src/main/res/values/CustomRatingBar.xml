@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="MyRatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">@color/colorWhite</item>
+        <item name="colorControlActivated">@android:color/holo_orange_light</item>
+    </style>
+
+</resources>

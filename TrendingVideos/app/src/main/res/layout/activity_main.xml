@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_height="match_parent"
+              android:layout_width="match_parent"
+              android:gravity="center_vertical"
+              android:orientation="vertical"
+              tools:context=".MainActivity">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/colorBlack"
+            android:weightSum="2"
+            android:orientation="horizontal"
+            tools:ignore="MissingConstraints">
+
+        <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+            <Button
+                    android:id="@+id/btn_movies"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@color/colorBlack"
+                    android:text="@string/movies_button"
+                    android:textColor="@color/colorWhite"/>
+
+            <TextView
+                    android:id="@+id/text_movies_underline"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/colorWhite"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" android:orientation="vertical">
+
+            <Button
+                    android:id="@+id/btn_series"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@color/colorBlack"
+                    android:text="@string/series_button"
+                    android:textColor="@color/colorWhite"/>
+
+            <TextView
+                    android:id="@+id/text_series_underline"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/colorWhite"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorBlack"
+            android:paddingTop="10dp"
+            tools:ignore="MissingConstraints">
+
+
+            <android.support.v4.widget.SwipeRefreshLayout
+                    android:id="@+id/swipeToRefresh"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:ignore="MissingConstraints">
+
+
+                <GridView
+                        android:id="@+id/video_grid_view"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:numColumns="2"
+                        android:horizontalSpacing="10dp"
+                        android:verticalSpacing="10dp"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"/>
+
+            </android.support.v4.widget.SwipeRefreshLayout>
+
+
+
+    </LinearLayout>
+
+</LinearLayout>
