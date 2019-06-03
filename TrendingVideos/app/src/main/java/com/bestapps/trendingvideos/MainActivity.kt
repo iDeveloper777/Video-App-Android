@@ -6,26 +6,22 @@ import android.content.Intent
 import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.support.v4.content.ContextCompat
 import android.support.v4.widget.SwipeRefreshLayout
+import android.util.Log
 import android.view.View
-import me.rohanjahagirdar.outofeden.Networking.OkHttpRequest
-import me.rohanjahagirdar.outofeden.Utils.FetchCompleteListener
-import okhttp3.OkHttpClient
 
 import com.google.gson.JsonObject
 import com.koushikdutta.async.future.FutureCallback
 import com.koushikdutta.ion.Ion
 import com.kaopiz.kprogresshud.KProgressHUD
 import me.rohanjahagirdar.outofeden.Utils.JSONParser
-import org.json.JSONObject
-import android.support.v4.os.HandlerCompat.postDelayed
-import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener
 import android.widget.*
 import com.google.gson.JsonArray
 import kotlin.math.ceil
 
+import io.branch.referral.Branch
+import io.branch.referral.BranchError
+import org.json.JSONObject
 
 public class MainActivity() : AppCompatActivity() {
     private lateinit var mSwipeRefreshLayout: SwipeRefreshLayout
@@ -57,6 +53,28 @@ public class MainActivity() : AppCompatActivity() {
         initSwipeLayout()
         //get Video list
         getVideoList(nCurrentPage, false)
+    }
+
+    //BranchIO
+    override fun onStart() {
+        super.onStart()
+
+        // Branch init
+        Branch.getInstance(this).initSession(object : Branch.BranchReferralInitListener {
+            override fun onInitFinished(referringParams: JSONObject, error: BranchError?) {
+                if (error == null) {
+                    Log.e("BRANCH SDK", referringParams.toString())
+                    // Retrieve deeplink keys from 'referringParams' and evaluate the values to determine where to route the user
+                    // Check '+clicked_branch_link' before deciding whether to use your Branch routing logic
+                } else {
+                    Log.e("BRANCH SDK", error.message)
+                }
+            }
+        }, this.intent.data, this)
+    }
+
+    public override fun onNewIntent(intent: Intent) {
+        this.intent = intent
     }
 
     //Buttons

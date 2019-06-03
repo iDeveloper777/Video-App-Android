@@ -31,12 +31,13 @@
             </intent-filter>
 
             <!-- Branch App Links (optional) -->
-            <intent-filter android:autoVerify="true" tools:targetApi="m">
+            <intent-filter android:autoVerify="true"
+                           tools:ignore="UnusedAttribute">
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="https" android:host="example.app.link" />
-                <data android:scheme="https" android:host="example-alternate.app.link" />
+                <data android:scheme="https" android:host="trendingvideos.app.link" />
+                <data android:scheme="https" android:host="trendingvideos-alternate.app.link" />
             </intent-filter>
         </activity>
         <activity
@@ -47,9 +48,11 @@
         </activity>
 
         <!-- Branch init -->
-        <meta-data android:name="io.branch.sdk.BranchKey" android:value="key_live_kaFuWw8WvY7yn1d9yYiP8gokwqjV0Sw" />
-        <meta-data android:name="io.branch.sdk.BranchKey.test" android:value="key_test_hlxrWC5Zx16DkYmWu4AHiimdqugRYMr" />
-        <meta-data android:name="io.branch.sdk.TestMode" android:value="false" /> <!-- Set to true to use Branch_Test_Key -->
+        <meta-data android:name="io.branch.sdk.BranchKey" android:value="key_live_fgTqn0eHO5vrZ1moUrAQ0mjiyAp5hNSk" />
+        <meta-data android:name="io.branch.sdk.BranchKey.test" android:value="key_test_oiOsjXjKS0sF8XmeQqrQZnjaryf9oTLq" />
+
+        <!-- Branch testing (TestMode "true" to simulate fresh installs on dev environment) -->
+        <meta-data android:name="io.branch.sdk.TestMode" android:value="false" />
 
         <!-- Branch install referrer tracking (optional) -->
         <receiver android:name="io.branch.referral.InstallListener" android:exported="true" android:permission=""
