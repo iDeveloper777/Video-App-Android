@@ -17,7 +17,6 @@ class ChapterJSONParser(c: Context) {
     var context = c
 
     fun loadJSONFromAsset(): String {
-        var json = null
         try{
             var inputStream = context.assets.open("walkofeden.json")
             var size = inputStream.available()

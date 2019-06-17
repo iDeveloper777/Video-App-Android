@@ -4,8 +4,10 @@ package com.bestapps.trendingvideos
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.customtabs.CustomTabsIntent
 import android.support.v4.widget.SwipeRefreshLayout
 import android.util.Log
 import android.view.View
@@ -45,20 +47,18 @@ public class MainActivity() : AppCompatActivity() {
     private var nCategory = 0
     private var prevCategory: Int = 0
 
+    private var isDeeplinkUser = false;
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        initButtons()
-        initSwipeLayout()
-        //get Video list
-        getVideoList(nCurrentPage, false)
+
     }
 
     //BranchIO
     override fun onStart() {
         super.onStart()
-
         // Branch init
         Branch.getInstance(this).initSession(object : Branch.BranchReferralInitListener {
             override fun onInitFinished(referringParams: JSONObject, error: BranchError?) {
@@ -66,15 +66,43 @@ public class MainActivity() : AppCompatActivity() {
                     Log.e("BRANCH SDK", referringParams.toString())
                     // Retrieve deeplink keys from 'referringParams' and evaluate the values to determine where to route the user
                     // Check '+clicked_branch_link' before deciding whether to use your Branch routing logic
+
+                    // latest
+                    val sessionParams = Branch.getInstance().latestReferringParams
+
+                    Log.e("sessions params :", sessionParams.toString())
+                    if (sessionParams.has("openBrowser") && sessionParams.get("openBrowser").toString().equals("true")) {
+                        isDeeplinkUser = true;
+
+
+                    }
                 } else {
                     Log.e("BRANCH SDK", error.message)
                 }
+
+                initGloble()
             }
         }, this.intent.data, this)
     }
 
     public override fun onNewIntent(intent: Intent) {
         this.intent = intent
+    }
+
+    public fun initGloble(){
+
+        if(isDeeplinkUser){
+            val openURL = Intent(android.content.Intent.ACTION_VIEW)
+            openURL.data = Uri.parse("https://www.google.com/")
+            startActivity(openURL)
+            finish()
+        }else{
+            initButtons()
+            initSwipeLayout()
+            //get Video list
+            getVideoList(nCurrentPage, false)
+        }
+
     }
 
     //Buttons

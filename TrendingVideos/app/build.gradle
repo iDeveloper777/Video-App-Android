@@ -49,4 +49,9 @@ dependencies {
     //noinspection GradleDynamicVersion
     implementation 'com.google.android.gms:play-services-ads:9+' // GAID matching
     implementation 'com.google.firebase:firebase-appindexing:18.0.0' // App indexing
+
+    //Facebook SDK
+    implementation 'com.facebook.android:facebook-android-sdk:5.0.0'
+
+    implementation 'com.android.support:multidex:1.0.3'
 }
